@@ -1,0 +1,15 @@
+[package]
+name = "prasiolite"
+version = "0.1.0"
+authors = ["tglanz"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[features]
+default = ["vulkan"]
+vulkan = ["amethyst/vulkan"]
+
+[dependencies]
+amethyst = { version = "0.12.0", features = ["nightly"] }
+log = { version = "0.4.6", features = ["serde"] }

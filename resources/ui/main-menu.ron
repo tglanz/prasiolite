@@ -1,0 +1,29 @@
+#![enable(implicit_some)]
+Container(
+    transform: (
+        anchor: Middle,
+        width: 1.,
+        height: 1.,
+        percent: true,
+    ),
+    background: SolidColor(.1, .1, .1, 1.),
+    children: [
+        Label(
+            transform: (
+                id: "title",
+                anchor: TopMiddle,
+                stretch: X(
+                    x_margin: 0,
+                ),
+                y: -50.,
+                height: 100.,
+                width: 100.,
+            ),
+            text: (
+                text: "prasiolite",
+                font_size: 100.,
+                color: (.9, .9, .9, 1.),
+            )
+        ),
+    ]
+)
