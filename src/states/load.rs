@@ -61,7 +61,7 @@ impl SimpleState for LoadState {
                     Trans::None
                 } else {
                     self.dispose(data.world);
-                    Trans::Switch(Box::new(MainMenuState))
+                    Trans::Switch(Box::new(MainMenuState::default()))
                 }
             },
         }

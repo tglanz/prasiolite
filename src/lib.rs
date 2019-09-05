@@ -9,7 +9,7 @@ use amethyst::{
         RenderingBundle,
     },
     ui::{UiBundle, RenderUi},
-    input::{StringBindings},
+    input::{StringBindings, InputBundle},
     utils::application_root_dir,
 };
 
@@ -26,6 +26,7 @@ pub fn run() -> amethyst::Result<()> {
     let display_config_path = resources.join("configs/display.ron");
 
     let game_data = GameDataBuilder::default()
+        .with_bundle(InputBundle::<StringBindings>::new())?
         .with_bundle(TransformBundle::new())?
         .with_bundle(UiBundle::<StringBindings>::new())?
         .with_bundle(
