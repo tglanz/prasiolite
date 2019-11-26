@@ -8,6 +8,7 @@ use super::Loadable;
 
 pub struct UiHandles {
     pub main_menu: Handle<UiPrefab>,
+    pub level: Handle<UiPrefab>,
 }
 
 pub fn load_ui_prefab(world: &mut World, progress_counter: &mut ProgressCounter, name: &str) -> Handle<UiPrefab> {
@@ -21,6 +22,7 @@ impl Loadable for UiHandles {
     fn load(world: &mut World, progress_counter: &mut ProgressCounter) -> Self {
         UiHandles {
             main_menu: load_ui_prefab(world, &mut *progress_counter, "main-menu"),
+            level: load_ui_prefab(world, &mut *progress_counter, "level"),
         }
     }
 }

@@ -31,7 +31,7 @@ impl LoadState {
         }
     }
 
-    pub fn dispose(&mut self, world: &mut World) {
+    pub fn dispose_ui(&mut self, world: &mut World) {
         if let Some(ui) = self.ui {
             let _ = world.delete_entity(ui);
             self.ui = None;
@@ -57,10 +57,10 @@ impl SimpleState for LoadState {
             Completion::Loading => Trans::None,
             Completion::Failed => Trans::Quit,
             Completion::Complete => {
-                if self.start_time.elapsed() < Duration::from_secs(2) {
+                if self.start_time.elapsed() < Duration::from_secs(1) {
                     Trans::None
                 } else {
-                    self.dispose(data.world);
+                    self.dispose_ui(data.world);
                     Trans::Switch(Box::new(MainMenuState::default()))
                 }
             },
