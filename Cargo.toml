@@ -13,3 +13,4 @@ vulkan = ["amethyst/vulkan"]
 [dependencies]
 amethyst = { version = "0.12.0", features = ["nightly"] }
 log = { version = "0.4.6", features = ["serde"] }
+tiled = "0.8.1"
