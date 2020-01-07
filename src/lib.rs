@@ -15,6 +15,7 @@ use amethyst::{
 
 mod resources;
 mod states;
+mod systems;
 
 pub fn run() -> amethyst::Result<()> {
     amethyst::start_logger(Default::default());
@@ -29,6 +30,8 @@ pub fn run() -> amethyst::Result<()> {
         .with_bundle(InputBundle::<StringBindings>::new())?
         .with_bundle(TransformBundle::new())?
         .with_bundle(UiBundle::<StringBindings>::new())?
+        .with_bundle(resources::Bundle)?
+        .with_bundle(systems::Bundle)?
         .with_bundle(
             RenderingBundle::<DefaultBackend>::new()
                 .with_plugin(

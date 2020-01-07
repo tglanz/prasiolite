@@ -8,7 +8,10 @@ use amethyst::{
 };
 
 use crate::{
-    resources::UiHandles
+    resources::{
+        UiHandles,
+        MapsHandles, Map
+    }
 };
 
 use log;
@@ -53,6 +56,13 @@ impl SimpleState for LevelState {
     fn on_start(&mut self, data: StateData<'_, GameData<'_, '_>>) {
         log::info!("LevelState::on_start");
         self.build_ui(data.world);
+
+        let map = {
+            let handles = data.world.read_resource::<MapsHandles>();
+            handles.map1.clone()
+        };
+
+                
     }
 
     fn on_stop(&mut self, data: StateData<'_, GameData<'_, '_>>) {

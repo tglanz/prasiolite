@@ -10,7 +10,7 @@ pub struct Map {
     pub tiled_map: tiled::Map,
 }
 
-type MapHandle = Handle<Map>;
+pub type MapHandle = Handle<Map>;
 
 pub struct MapsHandles {
     pub map1: MapHandle,
@@ -49,7 +49,7 @@ impl Format<Map> for TmxFormat {
     fn import_simple(&self, bytes: Vec<u8>) -> Result<Map, Error> {
         match tiled::parse(&bytes[..]) {
             Ok(tiled_map) => Ok(Map::from(tiled_map)),
-            _ => Err(Error::from_string("error, match to se what is the error exactly")),
+            err => Err(Error::from_string(format!("{:#?}", err))),
         }
     }
 }

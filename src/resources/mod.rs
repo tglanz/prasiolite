@@ -1,5 +1,6 @@
 pub mod ui_handles;
 pub mod maps_handles;
+pub mod bundle;
 
 use amethyst::{
     ecs::{World},
@@ -7,7 +8,8 @@ use amethyst::{
 };
 
 pub use ui_handles::UiHandles;
-pub use maps_handles::MapsHandles;
+pub use maps_handles::{MapsHandles, Map};
+pub use bundle::Bundle;
 
 trait Loadable {
     fn load(world: &mut World, progress_counter: &mut ProgressCounter) -> Self;
