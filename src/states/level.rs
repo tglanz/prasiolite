@@ -4,13 +4,13 @@ use std::{
 
 use amethyst::{
     prelude::*,
-    ecs::{World, Entity}
+    ecs::{World, Entity},
 };
 
 use crate::{
     resources::{
         UiHandles,
-        MapsHandles, Map
+        MapConfig, MapHandle,
     }
 };
 
@@ -18,14 +18,19 @@ use log;
 
 pub struct LevelState {
     start_time: Instant,
-    ui_root: Option<Entity>
+    ui_root: Option<Entity>,
+
+    map_config: MapConfig,
+    map_handle: MapHandle,
 }
 
 impl LevelState {
-    pub fn new() -> Self {
+    pub fn new(map_config: MapConfig, map_handle: MapHandle) -> Self {
         Self {
             start_time: Instant::now(),
             ui_root: None,
+            map_config,
+            map_handle
         }
     }
 
@@ -55,14 +60,16 @@ impl SimpleState for LevelState {
 
     fn on_start(&mut self, data: StateData<'_, GameData<'_, '_>>) {
         log::info!("LevelState::on_start");
+        log::info!("LevelState::on_start - map is: {:#}", &self.map_config.display);
         self.build_ui(data.world);
 
-        let map = {
-            let handles = data.world.read_resource::<MapsHandles>();
-            handles.map1.clone()
-        };
-
-                
+        // let maps_storage: Fetch<AssetStorage<Map>> = data.world.read_resource::<AssetStorage<Map>>();
+        // let map = maps_storage.get(&map_handle);
+        // if let Some(m) = map {
+        //     log::info!("SOME!");
+        // } else {
+        //     log::info!("SOME!");
+        // }
     }
 
     fn on_stop(&mut self, data: StateData<'_, GameData<'_, '_>>) {

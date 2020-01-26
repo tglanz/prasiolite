@@ -1,0 +1,29 @@
+#![enable(implicit_some)]
+Container(
+    transform: (
+        anchor: Middle,
+        width: 1.,
+        height: 1.,
+        percent: true,
+    ),
+    background: SolidColor(.1, .1, .1, 1.),
+    children: [
+        Label(
+            transform: (
+                id: "title",
+                anchor: Middle,
+                stretch: X(
+                    x_margin: 0,
+                ),
+                y: 0.,
+                height: 100.,
+                width: 100.,
+            ),
+            text: (
+                text: "loading level",
+                font_size: 30.,
+                color: (1., 1., 0., 1.),
+            )
+        ),
+    ]
+)

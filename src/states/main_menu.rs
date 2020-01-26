@@ -1,12 +1,12 @@
 use amethyst::{
     prelude::*,
-    ecs::{Entity},
+    ecs::{World, Entity},
     ui::{UiEventType, UiFinder, UiEvent},
 };
 
 use crate::{
-    states::{LevelState},
-    resources::{UiHandles},
+    states::LevelLoadState,
+    resources::{UiHandles, MapsConfig},
 };
 
 use log;
@@ -56,7 +56,7 @@ impl SimpleState for MainMenuState {
 
     fn on_start(&mut self, data: StateData<GameData<'_, '_>>) {
         log::info!("MainMenuState::on_start");
-        self.build_ui(data.world)
+        self.build_ui(data.world);
     }
 
     fn on_stop(&mut self, data: StateData<'_, GameData<'_, '_>>) {
@@ -74,7 +74,7 @@ impl SimpleState for MainMenuState {
         self.dispose_ui(data.world);
     }
  
-    fn handle_event(&mut self, _data: StateData<'_, GameData<'_, '_>>, event: StateEvent) -> SimpleTrans {
+    fn handle_event(&mut self, data: StateData<'_, GameData<'_, '_>>, event: StateEvent) -> SimpleTrans {
         match event {
             StateEvent::Ui(UiEvent {
                 event_type: UiEventType::Click,
@@ -85,7 +85,10 @@ impl SimpleState for MainMenuState {
                 }
 
                 if Some(target) == self.start_button {
-                    return Trans::Push(Box::from(LevelState::new()));
+                    let maps_config = &data.world.read_resource::<MapsConfig>();
+                    let entries = &maps_config.entries;
+                    let chosen_map = entries.first().unwrap().clone();
+                    return Trans::Push(Box::from(LevelLoadState::new(chosen_map)));
                 }
             },
             _ => {}

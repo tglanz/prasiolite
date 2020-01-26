@@ -1,0 +1,7 @@
+(
+    entries: [(
+        display: "Map 1",
+        file_name: "map1",
+        description: "just a map, the first map"
+    )]
+)
